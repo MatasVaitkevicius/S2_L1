@@ -252,14 +252,16 @@ namespace S2_L1
         }
 
         /// <summary>
-        /// Spausdina
+        /// Spausdina duomenys ir rezultatus į konsolę
         /// </summary>
-        /// <param name="pupilsContainer"></param>
-        /// <param name="network"></param>
-        /// <param name="alreadyKnowTest"></param>
-        /// <param name="networkList"></param>
-        /// <param name="removedPupil"></param>
-        /// <param name="mutualFriends"></param>
+        /// <param name="pupilsContainer"> Moksleivių konteineris </param>
+        /// <param name="network"> Ieškomų moksleivių ryšys </param>
+        /// <param name="alreadyKnowTest"> Ar jau pažįstami </param>
+        /// <param name="networkList"> Ryšių sąrašas </param>
+        /// <param name="removedPupil"> Pašalintas moksleivis </param>
+        /// <param name="mutualFriends"> Bendri draugai </param>
+        /// <param name="friendsNetworkData"> Moksleivių ryšių duomenų failas </param>
+        /// <param name="networkData"> Ieškomų moksleivių ryšių duomenų failas </param>
         static void PrintToConsole(PupilsContainer pupilsContainer, List<PupilsNetwork> network, bool alreadyKnowTest, List<string> networkList, Pupil removedPupil, List<string> mutualFriends,
             string friendsNetworkData, string networkData)
         {
@@ -299,16 +301,17 @@ namespace S2_L1
         }
 
         /// <summary>
-        /// 
+        /// Spausdina duomenys ir rezultatus į tekstinį failą
         /// </summary>
-        /// <param name="pupilsContainer"></param>
-        /// <param name="network"></param>
-        /// <param name="alreadyKnowTest"></param>
-        /// <param name="networkList"></param>
-        /// <param name="removedPupil"></param>
-        /// <param name="mutualFriends"></param>
-        /// <param name="friendsNetworkData"></param>
-        /// <param name="networkData"></param>
+        /// <param name="pupilsContainer"> Moksleivių konteineris </param>
+        /// <param name="network"> Ieškomų moksleivių ryšys </param>
+        /// <param name="alreadyKnowTest"> Ar jau pažįstami </param>
+        /// <param name="networkList"> Ryšių sąrašas </param>
+        /// <param name="removedPupil"> Pašalintas moksleivis </param>
+        /// <param name="mutualFriends"> Bendri draugai </param>
+        /// <param name="friendsNetworkData"> Moksleivių ryšių duomenų failas </param>
+        /// <param name="networkData"> Ieškomų moksleivių ryšių duomenų failas </param>
+        /// <param name="resultsFile"> Rezultatų failas </param>
         static void PrintToReportTable(PupilsContainer pupilsContainer, List<PupilsNetwork> network, bool alreadyKnowTest, List<string> networkList, Pupil removedPupil, List<string> mutualFriends,
         string friendsNetworkData, string networkData, string resultsFile)
         {
@@ -351,8 +354,6 @@ namespace S2_L1
                     writer.WriteLine($"{friend.PrintNetworkToReportTable()} {result, -40} |");
                 }
                 writer.WriteLine(new string('-', 119));
-
-
             }
         }
     }
