@@ -1,21 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
-using System.Text;
 
-namespace S2_L1
+namespace S2_L1_Web
 {
-    class Program
+    public partial class Forma1 : System.Web.UI.Page
     {
-        static void Main(string[] args)
-        {
-            const string friendsNetworkData = "U31DUOM.txt"; //Duomenų failas, kuriame yra moksleivių ryšiai
-            const string networkData = "U32DUOM.txt"; //Duomenų failas, kuriame yra ieškomi moksleivių ryšiai
-            const string resultsFile = "U3REZ.TXT"; // Pradiniai duomenys ir rezultatai išspausdinti lentele failas
+        const string friendsNetworkData = "U31DUOM.txt"; //Duomenų failas, kuriame yra moksleivių ryšiai
+        const string networkData = "U32DUOM.txt"; //Duomenų failas, kuriame yra ieškomi moksleivių ryšiai
+        const string resultsFile = "U3REZ.TXT"; // Pradiniai duomenys ir rezultatai išspausdinti lentele failas
 
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
             var pupilsContainer = ReadPupilsData(friendsNetworkData); // Mokinių konteineris
-            var pupilsContainerCopy2 = pupilsContainer.ShallowCopy();
             var network = ReadNetworkData(networkData); //Kuriuos rysius surasti
             var pupilContainerClone = pupilsContainer.ShallowCopy(); //Mokinių konteinerio kopija
             var alreadyKnowTest = true; // Ar jau pažįstami testas
@@ -24,12 +26,9 @@ namespace S2_L1
             var mutualFriends = new List<string>(); // Bendri draugai
             var alreadyBeenPupils = new List<string>(); // Jau buvę draugai
 
-
-            PrintToConsole(pupilsContainer, network, alreadyKnowTest, networkList, removedPupil, mutualFriends, alreadyBeenPupils, friendsNetworkData, networkData);
-            Console.WriteLine($"Pradiniai duomenys ir rezultatai spausdinami lentelėmis tekstiniame faile: {resultsFile}");
-            mutualFriends.Clear();
             PrintToReportTable(pupilsContainer, network, alreadyKnowTest, networkList, removedPupil, mutualFriends, alreadyBeenPupils, friendsNetworkData, networkData, resultsFile);
-            Console.ReadKey();
+            var printToWeb = File.ReadAllText(Server.MapPath(resultsFile));
+            TextBox1.Text = printToWeb;
         }
 
         /// <summary>
@@ -37,11 +36,11 @@ namespace S2_L1
         /// </summary>
         /// <param name="file"> Duomenų failas </param>
         /// <returns> Moksleivių konteinrį </returns>
-        static PupilsContainer ReadPupilsData(string file)
+        PupilsContainer ReadPupilsData(string file)
         {
             var pupils = new PupilsContainer();
 
-            using (StreamReader reader = new StreamReader(file))
+            using (StreamReader reader = new StreamReader(Server.MapPath(file)))
             {
                 string line = reader.ReadLine();
 
@@ -68,11 +67,11 @@ namespace S2_L1
         /// </summary>
         /// <param name="file"></param>
         /// <returns> Sąrašą ieškomų moksleivių ryšių </returns>
-        static List<PupilsNetwork> ReadNetworkData(string file)
+        List<PupilsNetwork> ReadNetworkData(string file)
         {
             var network = new List<PupilsNetwork>();
 
-            using (StreamReader reader = new StreamReader(file))
+            using (StreamReader reader = new StreamReader(Server.MapPath(file)))
             {
                 string line = reader.ReadLine();
 
@@ -215,51 +214,6 @@ namespace S2_L1
         }
 
         /// <summary>
-        /// Spausdina duomenys ir rezultatus į konsolę
-        /// </summary>
-        /// <param name="pupilsContainer"> Moksleivių konteineris </param>
-        /// <param name="network"> Ieškomų moksleivių ryšys </param>
-        /// <param name="alreadyKnowTest"> Ar jau pažįstami </param>
-        /// <param name="networkList"> Ryšių sąrašas </param>
-        /// <param name="removedPupil"> Pašalintas moksleivis </param>
-        /// <param name="mutualFriends"> Bendri draugai </param>
-        /// <param name="friendsNetworkData"> Moksleivių ryšių duomenų failas </param>
-        /// <param name="networkData"> Ieškomų moksleivių ryšių duomenų failas </param>
-        static void PrintToConsole(PupilsContainer pupilsContainer, List<PupilsNetwork> network, bool alreadyKnowTest, List<string> networkList, Pupil removedPupil, List<string> mutualFriends, List<string> alreadyBeenPupils,
-            string friendsNetworkData, string networkData)
-        {
-            Console.WriteLine("LD_16.Pazintis");
-            Console.WriteLine("Pradiniai duomenys");
-            Console.WriteLine();
-            Console.WriteLine($"Pirmasis duomenu failas {friendsNetworkData}");
-            Console.WriteLine();
-            for (int i = 0; i < pupilsContainer.Count; i++)
-            {
-                Console.WriteLine($"{pupilsContainer.GetPupil(i).PrintToConsolePupil()}");
-            }
-
-            Console.WriteLine();
-            Console.WriteLine($"Antrasis duomenu failas {networkData}");
-            {
-                foreach (var friend in network)
-                {
-                    Console.WriteLine(friend.PrintToConsoleNetwork());
-                }
-            }
-
-            Console.WriteLine();
-            Console.WriteLine("Rezultatai");
-            foreach (var pupil in network)
-            {
-                Console.WriteLine($"Surasti santykius tarp: {pupil.FirstFriend} ir {pupil.SecondFriend}");
-                var pupilsContainerCopy = pupilsContainer.ShallowCopy();
-                var result = NetworkResult(pupilsContainerCopy, pupil.FirstFriend, pupil.SecondFriend, alreadyKnowTest, networkList, removedPupil, mutualFriends, alreadyBeenPupils);
-                Console.WriteLine(result);
-                Console.WriteLine();
-            }
-        }
-
-        /// <summary>
         /// Spausdina duomenys ir rezultatus į tekstinį failą
         /// </summary>
         /// <param name="pupilsContainer"> Moksleivių konteineris </param>
@@ -271,10 +225,10 @@ namespace S2_L1
         /// <param name="friendsNetworkData"> Moksleivių ryšių duomenų failas </param>
         /// <param name="networkData"> Ieškomų moksleivių ryšių duomenų failas </param>
         /// <param name="resultsFile"> Rezultatų failas </param>
-        static void PrintToReportTable(PupilsContainer pupilsContainer, List<PupilsNetwork> network, bool alreadyKnowTest, List<string> networkList, Pupil removedPupil, List<string> mutualFriends, List<string> alreadyBeenPupils,
+        void PrintToReportTable(PupilsContainer pupilsContainer, List<PupilsNetwork> network, bool alreadyKnowTest, List<string> networkList, Pupil removedPupil, List<string> mutualFriends, List<string> alreadyBeenPupils,
         string friendsNetworkData, string networkData, string resultsFile)
         {
-            using (var writer = new StreamWriter(resultsFile, false, Encoding.UTF8))
+            using (StreamWriter writer = new StreamWriter(Server.MapPath(resultsFile))) 
             {
                 writer.WriteLine("Pradiniai Duomenys");
                 writer.WriteLine();
@@ -307,12 +261,22 @@ namespace S2_L1
                 writer.WriteLine(new string('-', 119));
                 foreach (var friend in network)
                 {
-                    //var pupilsContainerCopy = pupilsContainer.ShallowCopy();
-                    var result = NetworkResult(pupilsContainer, friend.FirstFriend, friend.SecondFriend, alreadyKnowTest, networkList, removedPupil, mutualFriends, alreadyBeenPupils);
+                    var pupilsContainerCopy = pupilsContainer.ShallowCopy();
+                    var result = NetworkResult(pupilsContainerCopy, friend.FirstFriend, friend.SecondFriend, alreadyKnowTest, networkList, removedPupil, mutualFriends, alreadyBeenPupils);
                     writer.WriteLine($"{friend.PrintNetworkToReportTable()} {result,-40} |");
                 }
                 writer.WriteLine(new string('-', 119));
             }
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void TextBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

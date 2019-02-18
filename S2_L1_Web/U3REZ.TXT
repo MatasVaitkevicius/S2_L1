@@ -1,0 +1,46 @@
+Pradiniai Duomenys
+
+U31DUOM.txt
+Moksleiviai
+-------------------------------------------------------------------------------------
+| Moksleivio vardas         |          Kiek draugų turi | Moksleivio draugai        |
+| Matas                     |                         2 | Jonas, Petras             |
+-------------------------------------------------------------------------------------
+| Moksleivio vardas         |          Kiek draugų turi | Moksleivio draugai        |
+| Jonas                     |                         1 | Matas                     |
+-------------------------------------------------------------------------------------
+| Moksleivio vardas         |          Kiek draugų turi | Moksleivio draugai        |
+| Petras                    |                         2 | Matas, Ona                |
+-------------------------------------------------------------------------------------
+| Moksleivio vardas         |          Kiek draugų turi | Moksleivio draugai        |
+| Algimantas                |                         3 | Anzelmas, Gediminas, Ona  |
+-------------------------------------------------------------------------------------
+| Moksleivio vardas         |          Kiek draugų turi | Moksleivio draugai        |
+| Anzelmas                  |                         2 | Algimantas, Gediminas     |
+-------------------------------------------------------------------------------------
+| Moksleivio vardas         |          Kiek draugų turi | Moksleivio draugai        |
+| Gediminas                 |                         2 | Algimantas, Anzelmas      |
+-------------------------------------------------------------------------------------
+| Moksleivio vardas         |          Kiek draugų turi | Moksleivio draugai        |
+| Ona                       |                         2 | Jonas, Matas              |
+-------------------------------------------------------------------------------------
+
+Ieškomų moksleivių ryšiai
+U32DUOM.txt
+----------------------------------------------------------------------------
+| Pirmojo moksleivio vardas     | Antrojo moksleivio vardas                |
+----------------------------------------------------------------------------
+| Matas                         | Jonas                                    |
+| Matas                         | Ona                                      |
+| Matas                         | Anzelmas                                 |
+----------------------------------------------------------------------------
+
+Rezultatai
+U3REZ.TXT
+-----------------------------------------------------------------------------------------------------------------------
+| Pirmojo moksleivio vardas     | Antrojo moksleivio vardas                | Ryšys                                    |
+-----------------------------------------------------------------------------------------------------------------------
+| Matas                         | Jonas                                    | Jau pazistami                            |
+| Matas                         | Ona                                      | Bendri pazistami: Petras                 |
+| Matas                         | Anzelmas                                 | Negali susipazinti                       |
+-----------------------------------------------------------------------------------------------------------------------

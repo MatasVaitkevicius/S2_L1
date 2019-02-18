@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="S2_L1_Web.Pupil" Collapsed="true">
+    <Position X="4.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAACAAQAAAAAAQAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Pupil.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="S2_L1_Web.PupilsContainer" Collapsed="true">
+    <Position X="4.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAABAAAAAAQAEAAAAAAAAAgAABQAAAA=</HashCode>
+      <FileName>PupilsContainer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="S2_L1_Web.PupilsNetwork" Collapsed="true">
+    <Position X="4.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAABAAAAAQAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>PupilsNetwork.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
